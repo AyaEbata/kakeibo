@@ -3,7 +3,7 @@ Slackから入力するとスプレッドシートに記入される家計簿
 
 ## ソースをGoogle App Scriptで動かすための設定
 ### SlackのLibraryを追加する
-メニューから「リソース」→「ライブラリ」選択し、Library Keyを入力する。
+メニューから「リソース」→「ライブラリ」選択し、Library Keyを入力する。  
 SlackAppのLibrary Key →　M3W5Ut3Q39AaIwLquryEPMwV62A3znfOO
 
 ### Tokenを取得する
@@ -16,14 +16,14 @@ SlackAppのLibrary Key →　M3W5Ut3Q39AaIwLquryEPMwV62A3znfOO
 
 ## GASからGithubを操作するための設定
 ### 使うもの
-Google Apps Script GitHub アシスタント（Chrome拡張）
+Google Apps Script GitHub アシスタント（Chrome拡張）  
 https://chrome.google.com/webstore/detail/google-apps-script-github/lfjcgcmkmjjlieihflfhjopckgpelofo?hl=ja
 
 ### Tokenを取得する
 https://github.com/settings/tokens から作って取得する。
 
 ## 公開する
-Webhookを使ってるので、公開の作業が必要。
+Webhookを使ってるので、公開の作業が必要。  
 メニューの「公開」→「ウェブアプリケーションとして導入」でプロジェクトバージョンを新規作成で保存する。
 
 ## 開発メモ
