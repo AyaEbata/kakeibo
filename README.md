@@ -21,3 +21,7 @@ https://chrome.google.com/webstore/detail/google-apps-script-github/lfjcgcmkmjjl
 
 ### Tokenを取得する
 https://github.com/settings/tokens から作って取得する。
+
+## 公開する
+Webhookを使ってるので、公開の作業が必要。
+メニューの「公開」→「ウェブアプリケーションとして導入」でプロジェクトバージョンを新規作成で保存する。
