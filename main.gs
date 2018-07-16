@@ -4,9 +4,12 @@ function doPost(e) {
   var slackApp = SlackApp.create(token);
   var channel = "#kakeibo";
 
-  // botだったら何もしない
-  if (e.parameter.user_id == "USLACKBOT") {
+  if (isSlackBot(e.parameter.user_id)) {
     return;
   }
   slackApp.postMessage(channel, e.parameter.text);
+}
+
+function isSlackBot(userId) {
+  return userId == "USLACKBOT";
 }
