@@ -12,14 +12,16 @@ function isSlackBot(userId) {
   return userId == "USLACKBOT";
 }
 
-// TODO: リファクタ（雑すぎる
 function format(text) {
-  var splitText = text.split("\n");  // ["7/21","日用品", "108円", "100均一"]
-  var date = splitText[0].split("/");  // ["7", "21"]
-  splitText[2] = "¥" + splitText[2].slice(0, -1);
-  splitText.shift()  // ["日用品", "¥108", "100均一"]
-  date.unshift("")  // ["", "7", "21"]
-  return date.concat(splitText);  // ["", "7", "21","日用品", "¥108", "100均一"]
+  var originalData = text.split("\n");  // ["7/21","日用品", "108円", "100均一", ...]
+  var date = originalData[0].split("/");  // ["7", "21"]
+  var price = "¥" + originalData[2]
+    .replace(/[^0-9]/g, '')
+    .replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,' );
+  return [""]
+    .concat(date)
+    .concat([originalData[1], price])
+    .concat(originalData.slice(3));  // ["", "7", "21","日用品", "¥108", "100均一", ...]
 }
 
 function writeOnSpreadsheet(formattedText) {
