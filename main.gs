@@ -13,15 +13,23 @@ function isSlackBot(userId) {
 }
 
 function format(text) {
-  var originalData = text.split("\n");  // ["7/21","日用品", "108円", "100均一", ...]
-  var date = originalData[0].split("/");  // ["7", "21"]
-  var price = "¥" + originalData[2]
-    .replace(/[^0-9]/g, '')
-    .replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,' );
+  var originalData = text.split("\n");  // ["7/21","日用品", "1080円", "100均一", ...]
+  var date = convertToDateFormat(originalData[0]);  // ["7", "21"]
+  var price = parseInt(originalData[2].replace(/[^0-9]/g, ''));  // 1080円 -> 1080
   return [""]
     .concat(date)
     .concat([originalData[1], price])
-    .concat(originalData.slice(3));  // ["", "7", "21","日用品", "¥108", "100均一", ...]
+    .concat(originalData.slice(3));  // ["", "7", "21","日用品", "1080", "100均一", ...]
+}
+
+function convertToDateFormat(originalText) {
+  /*
+  // TODO: chromeで"7/21"渡した時と、gasで渡した時の結果が違う、、、
+  // TODO: 日本語の月日の時
+  var date = new Date(originalText);
+  return [(date.getMonth() + 1).toString(), date.getDate().toString()];
+  */
+  return originalText.split("/");
 }
 
 function writeOnSpreadsheet(formattedText) {
