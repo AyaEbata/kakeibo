@@ -51,3 +51,5 @@ Webhookを使ってるので、公開の作業が必要。
 ## 開発メモ
 - Outgoing WebhooksのTrigger Wordsを空で登録すると無限ループになる。
     - 自分の投稿に反応してbotが返信した場合、botの投稿にも反応してまたbotが投稿する、の無限ループになる。
+- Date型がjsとgasで若干挙動が違う
+     - jsだとnew Date("7/30")が行けるけど、gasだといけない…
