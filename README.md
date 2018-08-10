@@ -24,10 +24,15 @@ Slackからpostしてスプレッドシートの家計簿に記入したい場�
 
 「カテゴリ詳細」、「備考」に記入したい場合、同様にその下に付け足して投稿する。
 
+### スプレッドシートの指定について
+今はまだ仮で、gasのプロパティを用いて指定中。  
+メニューの「ファイル」→「プロジェクトのプロパティ」→「スクリプトのプロパティ」から`SPREADSHEET_ID_[月]`とスプレッドシートIDを保存することで、書き込むスプレッドシートを指定出来る。（`[月]`には数字）  
+各月ごとに登録することで、Slackから投稿された日付をもとに適した月のスプレッドシートに記入される。
+
 ## ソースをGoogle App Scriptで動かすための設定
 ### SlackのLibraryを追加する
 メニューから「リソース」→「ライブラリ」選択し、Library Keyを入力する。  
-SlackAppのLibrary Key →　M3W5Ut3Q39AaIwLquryEPMwV62A3znfOO
+SlackAppのLibrary Key →　`M3W5Ut3Q39AaIwLquryEPMwV62A3znfOO`
 
 ### Tokenを取得する
 1. https://api.slack.com/apps でappを作成
@@ -35,7 +40,7 @@ SlackAppのLibrary Key →　M3W5Ut3Q39AaIwLquryEPMwV62A3znfOO
 3. Bot User OAuth Access TokenのTokenを取得
 
 ### Tokenをプロパティに登録する（ソースコードに埋め込みたくないから）
-メニューの「ファイル」→「プロジェクトのプロパティ」→「スクリプトのプロパティ」からSLACK_ACCESS_TOKENとTokenを保存する。
+メニューの「ファイル」→「プロジェクトのプロパティ」→「スクリプトのプロパティ」から`SLACK_ACCESS_TOKEN`とTokenを保存する。
 
 ## GASからGithubを操作するための設定
 ### 使うもの
