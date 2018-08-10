@@ -3,9 +3,8 @@ function doPost(e) {
   if (isSlackBot(e.parameter.user_id)) {
     return;
   }
-
   writeOnSpreadsheet(format(e.parameter.text));
-  postToSlack();
+  postToSlack("記入完了したー！");
 }
 
 function isSlackBot(userId) {
@@ -33,15 +32,23 @@ function convertToDateFormat(originalText) {
 }
 
 function writeOnSpreadsheet(formattedText) {
-  var id = PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
+  var month = formattedText[1]
+  var id = PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID_' + month);
+  // var id = PropertiesService.getScriptProperties().getProperty('TEST_SPREADSHEET_ID_' + month);  // テスト環境
+  
+  if(!id) {
+    postToSlack(month + "月のスプレッドシートが設定されてないよ><");    
+    new Error();
+  }
+  
   var spreadsheet = SpreadsheetApp.openById(id);
   var sheet = spreadsheet.getSheetByName("支出");
   sheet.appendRow(formattedText);
 }
 
-function postToSlack() {
+function postToSlack(message) {
   var token = PropertiesService.getScriptProperties().getProperty('SLACK_ACCESS_TOKEN');
   var slackApp = SlackApp.create(token);
-  slackApp.postMessage("#kakeibo", "記入完了したー！");
-  // slackApp.postMessage("#bot_test_aya", "記入完了したー！");  // テスト環境はこっち、Outgoing WebHooksの設定も戻す
+  slackApp.postMessage("#kakeibo", message);
+  // slackApp.postMessage("#bot_test_aya", message);  // テスト環境はこっち、Outgoing WebHooksの設定も戻す
 }
